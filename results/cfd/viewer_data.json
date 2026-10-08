@@ -1,17 +1,17 @@
 {
-  "description": "OpenFOAM sweep of the v7 filter (sensor values in kPa, flows in L/min).",
+  "description": "OpenFOAM sweep of the v8 filter (sensor values in kPa, flows in L/min).",
   "runs": [
     {
       "inflow_lpm": 5.0,
       "clog": 0.0,
-      "outlet_lpm": 4.99,
+      "outlet_lpm": 4.996,
       "overflow_lpm": 0.0,
       "P1": 0.0,
-      "P2": 0.093,
-      "dP": 0.1,
+      "P2": 0.0,
+      "dP": 0.098,
       "lcd": [
         "P1 IN : --.-- (dry) ",
-        "P2 OUT:  0.09 kPa   ",
+        "P2 OUT:  0.00 kPa   ",
         "dP    : --.--       ",
         "FLOW  :  5.0 L/min  "
       ]
@@ -19,14 +19,14 @@
     {
       "inflow_lpm": 10.0,
       "clog": 0.0,
-      "outlet_lpm": 9.981,
+      "outlet_lpm": 9.992,
       "overflow_lpm": 0.0,
       "P1": 0.0,
-      "P2": 0.796,
-      "dP": 0.214,
+      "P2": 0.255,
+      "dP": 0.195,
       "lcd": [
         "P1 IN : --.-- (dry) ",
-        "P2 OUT:  0.80 kPa   ",
+        "P2 OUT:  0.26 kPa   ",
         "dP    : --.--       ",
         "FLOW  : 10.0 L/min  "
       ]
@@ -34,59 +34,59 @@
     {
       "inflow_lpm": 15.0,
       "clog": 0.0,
-      "outlet_lpm": 14.86,
-      "overflow_lpm": 0.117,
-      "P1": 0.772,
-      "P2": 1.936,
-      "dP": 0.315,
+      "outlet_lpm": 14.992,
+      "overflow_lpm": 0.0,
+      "P1": 0.0,
+      "P2": 0.729,
+      "dP": 0.324,
       "lcd": [
-        "P1 IN :  0.77 kPa   ",
-        "P2 OUT:  1.94 kPa   ",
-        "dP    :  0.32 kPa   ",
-        "FLOW  : 14.9 L/min  "
+        "P1 IN : --.-- (dry) ",
+        "P2 OUT:  0.73 kPa   ",
+        "dP    : --.--       ",
+        "FLOW  : 15.0 L/min  "
       ]
     },
     {
       "inflow_lpm": 20.0,
       "clog": 0.0,
-      "outlet_lpm": 14.852,
-      "overflow_lpm": 5.117,
-      "P1": 0.791,
-      "P2": 1.933,
-      "dP": 0.338,
+      "outlet_lpm": 19.986,
+      "overflow_lpm": 0.0,
+      "P1": 0.363,
+      "P2": 1.392,
+      "dP": 0.45,
       "lcd": [
-        "P1 IN :  0.79 kPa   ",
-        "P2 OUT:  1.93 kPa   ",
-        "dP    :  0.34 kPa   ",
-        "FLOW  : 14.9 L/min  "
+        "P1 IN :  0.36 kPa   ",
+        "P2 OUT:  1.39 kPa   ",
+        "dP    :  0.45 kPa   ",
+        "FLOW  : 20.0 L/min  "
       ]
     },
     {
       "inflow_lpm": 25.0,
       "clog": 0.0,
-      "outlet_lpm": 14.857,
-      "overflow_lpm": 10.117,
-      "P1": 0.767,
-      "P2": 1.933,
-      "dP": 0.314,
+      "outlet_lpm": 22.299,
+      "overflow_lpm": 2.694,
+      "P1": 0.791,
+      "P2": 1.759,
+      "dP": 0.512,
       "lcd": [
-        "P1 IN :  0.77 kPa   ",
-        "P2 OUT:  1.93 kPa   ",
-        "dP    :  0.31 kPa   ",
-        "FLOW  : 14.9 L/min  "
+        "P1 IN :  0.79 kPa   ",
+        "P2 OUT:  1.76 kPa   ",
+        "dP    :  0.51 kPa   ",
+        "FLOW  : 22.3 L/min  "
       ]
     },
     {
       "inflow_lpm": 5.0,
       "clog": 0.5,
-      "outlet_lpm": 4.99,
+      "outlet_lpm": 4.995,
       "overflow_lpm": 0.0,
       "P1": 0.0,
-      "P2": 0.093,
-      "dP": 0.194,
+      "P2": 0.0,
+      "dP": 0.195,
       "lcd": [
         "P1 IN : --.-- (dry) ",
-        "P2 OUT:  0.09 kPa   ",
+        "P2 OUT:  0.00 kPa   ",
         "dP    : --.--       ",
         "FLOW  :  5.0 L/min  "
       ]
@@ -94,14 +94,14 @@
     {
       "inflow_lpm": 10.0,
       "clog": 0.5,
-      "outlet_lpm": 9.978,
+      "outlet_lpm": 9.995,
       "overflow_lpm": 0.0,
       "P1": 0.0,
-      "P2": 0.795,
-      "dP": 0.405,
+      "P2": 0.256,
+      "dP": 0.402,
       "lcd": [
         "P1 IN : --.-- (dry) ",
-        "P2 OUT:  0.80 kPa   ",
+        "P2 OUT:  0.26 kPa   ",
         "dP    : --.--       ",
         "FLOW  : 10.0 L/min  "
       ]
@@ -109,59 +109,59 @@
     {
       "inflow_lpm": 15.0,
       "clog": 0.5,
-      "outlet_lpm": 13.797,
-      "overflow_lpm": 1.178,
-      "P1": 0.734,
-      "P2": 1.648,
-      "dP": 0.565,
+      "outlet_lpm": 14.989,
+      "overflow_lpm": 0.0,
+      "P1": 0.0,
+      "P2": 0.726,
+      "dP": 0.609,
       "lcd": [
-        "P1 IN :  0.73 kPa   ",
-        "P2 OUT:  1.65 kPa   ",
-        "dP    :  0.56 kPa   ",
-        "FLOW  : 13.8 L/min  "
+        "P1 IN : --.-- (dry) ",
+        "P2 OUT:  0.73 kPa   ",
+        "dP    : --.--       ",
+        "FLOW  : 15.0 L/min  "
       ]
     },
     {
       "inflow_lpm": 20.0,
       "clog": 0.5,
-      "outlet_lpm": 13.796,
-      "overflow_lpm": 6.178,
-      "P1": 0.742,
-      "P2": 1.65,
-      "dP": 0.571,
+      "outlet_lpm": 19.834,
+      "overflow_lpm": 0.161,
+      "P1": 0.731,
+      "P2": 1.371,
+      "dP": 0.84,
       "lcd": [
-        "P1 IN :  0.74 kPa   ",
-        "P2 OUT:  1.65 kPa   ",
-        "dP    :  0.57 kPa   ",
-        "FLOW  : 13.8 L/min  "
+        "P1 IN :  0.73 kPa   ",
+        "P2 OUT:  1.37 kPa   ",
+        "dP    :  0.84 kPa   ",
+        "FLOW  : 19.8 L/min  "
       ]
     },
     {
       "inflow_lpm": 25.0,
       "clog": 0.5,
-      "outlet_lpm": 13.799,
-      "overflow_lpm": 11.178,
-      "P1": 0.744,
-      "P2": 1.65,
-      "dP": 0.574,
+      "outlet_lpm": 19.83,
+      "overflow_lpm": 5.161,
+      "P1": 0.746,
+      "P2": 1.367,
+      "dP": 0.858,
       "lcd": [
-        "P1 IN :  0.74 kPa   ",
-        "P2 OUT:  1.65 kPa   ",
-        "dP    :  0.57 kPa   ",
-        "FLOW  : 13.8 L/min  "
+        "P1 IN :  0.75 kPa   ",
+        "P2 OUT:  1.37 kPa   ",
+        "dP    :  0.86 kPa   ",
+        "FLOW  : 19.8 L/min  "
       ]
     },
     {
       "inflow_lpm": 5.0,
       "clog": 0.8,
-      "outlet_lpm": 4.99,
+      "outlet_lpm": 4.995,
       "overflow_lpm": 0.0,
       "P1": 0.0,
-      "P2": 0.094,
+      "P2": 0.0,
       "dP": 0.483,
       "lcd": [
         "P1 IN : --.-- (dry) ",
-        "P2 OUT:  0.09 kPa   ",
+        "P2 OUT:  0.00 kPa   ",
         "dP    : --.--       ",
         "FLOW  :  5.0 L/min  "
       ]
@@ -169,61 +169,61 @@
     {
       "inflow_lpm": 10.0,
       "clog": 0.8,
-      "outlet_lpm": 9.981,
+      "outlet_lpm": 9.99,
       "overflow_lpm": 0.0,
-      "P1": 0.336,
-      "P2": 0.797,
-      "dP": 1.019,
+      "P1": 0.0,
+      "P2": 0.255,
+      "dP": 1.017,
       "lcd": [
-        "P1 IN :  0.34 kPa   ",
-        "P2 OUT:  0.80 kPa   ",
-        "dP    :  1.02 kPa   ",
+        "P1 IN : --.-- (dry) ",
+        "P2 OUT:  0.26 kPa   ",
+        "dP    : --.--       ",
         "FLOW  : 10.0 L/min  "
       ]
     },
     {
       "inflow_lpm": 15.0,
       "clog": 0.8,
-      "outlet_lpm": 11.024,
-      "overflow_lpm": 3.959,
-      "P1": 0.639,
-      "P2": 1.001,
-      "dP": 1.117,
+      "outlet_lpm": 14.068,
+      "overflow_lpm": 0.922,
+      "P1": 0.616,
+      "P2": 0.626,
+      "dP": 1.469,
       "lcd": [
-        "P1 IN :  0.64 kPa   ",
-        "P2 OUT:  1.00 kPa   ",
-        "dP    :  1.12 kPa   ",
-        "FLOW  : 11.0 L/min  "
+        "P1 IN :  0.62 kPa   ",
+        "P2 OUT:  0.63 kPa   ",
+        "dP    :  1.47 kPa   ",
+        "FLOW  : 14.1 L/min  "
       ]
     },
     {
       "inflow_lpm": 20.0,
       "clog": 0.8,
-      "outlet_lpm": 11.021,
-      "overflow_lpm": 8.959,
-      "P1": 0.617,
-      "P2": 1.002,
-      "dP": 1.095,
+      "outlet_lpm": 14.072,
+      "overflow_lpm": 5.922,
+      "P1": 0.669,
+      "P2": 0.627,
+      "dP": 1.522,
       "lcd": [
-        "P1 IN :  0.62 kPa   ",
-        "P2 OUT:  1.00 kPa   ",
-        "dP    :  1.09 kPa   ",
-        "FLOW  : 11.0 L/min  "
+        "P1 IN :  0.67 kPa   ",
+        "P2 OUT:  0.63 kPa   ",
+        "dP    :  1.52 kPa   ",
+        "FLOW  : 14.1 L/min  "
       ]
     },
     {
       "inflow_lpm": 25.0,
       "clog": 0.8,
-      "outlet_lpm": 11.018,
-      "overflow_lpm": 13.959,
-      "P1": 0.688,
-      "P2": 1.002,
-      "dP": 1.166,
+      "outlet_lpm": 14.074,
+      "overflow_lpm": 10.922,
+      "P1": 0.621,
+      "P2": 0.627,
+      "dP": 1.473,
       "lcd": [
-        "P1 IN :  0.69 kPa   ",
-        "P2 OUT:  1.00 kPa   ",
-        "dP    :  1.17 kPa   ",
-        "FLOW  : 11.0 L/min  "
+        "P1 IN :  0.62 kPa   ",
+        "P2 OUT:  0.63 kPa   ",
+        "dP    :  1.47 kPa   ",
+        "FLOW  : 14.1 L/min  "
       ]
     }
   ]

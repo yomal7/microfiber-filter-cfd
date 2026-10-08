@@ -1,0 +1,96 @@
+{
+  "description": "CFD runs for the viewer's Simulation mode",
+  "mesh": "normal",
+  "runs": [
+    {
+      "case": "q05p0_c00",
+      "inflow_lpm": 5.0,
+      "clog": 0.0,
+      "file": "q05p0_c00.json"
+    },
+    {
+      "case": "q10p0_c00",
+      "inflow_lpm": 10.0,
+      "clog": 0.0,
+      "file": "q10p0_c00.json"
+    },
+    {
+      "case": "q15p0_c00",
+      "inflow_lpm": 15.0,
+      "clog": 0.0,
+      "file": "q15p0_c00.json"
+    },
+    {
+      "case": "q20p0_c00",
+      "inflow_lpm": 20.0,
+      "clog": 0.0,
+      "file": "q20p0_c00.json"
+    },
+    {
+      "case": "q25p0_c00",
+      "inflow_lpm": 25.0,
+      "clog": 0.0,
+      "file": "q25p0_c00.json"
+    },
+    {
+      "case": "q05p0_c50",
+      "inflow_lpm": 5.0,
+      "clog": 0.5,
+      "file": "q05p0_c50.json"
+    },
+    {
+      "case": "q10p0_c50",
+      "inflow_lpm": 10.0,
+      "clog": 0.5,
+      "file": "q10p0_c50.json"
+    },
+    {
+      "case": "q15p0_c50",
+      "inflow_lpm": 15.0,
+      "clog": 0.5,
+      "file": "q15p0_c50.json"
+    },
+    {
+      "case": "q20p0_c50",
+      "inflow_lpm": 20.0,
+      "clog": 0.5,
+      "file": "q20p0_c50.json"
+    },
+    {
+      "case": "q25p0_c50",
+      "inflow_lpm": 25.0,
+      "clog": 0.5,
+      "file": "q25p0_c50.json"
+    },
+    {
+      "case": "q05p0_c80",
+      "inflow_lpm": 5.0,
+      "clog": 0.8,
+      "file": "q05p0_c80.json"
+    },
+    {
+      "case": "q10p0_c80",
+      "inflow_lpm": 10.0,
+      "clog": 0.8,
+      "file": "q10p0_c80.json"
+    },
+    {
+      "case": "q15p0_c80",
+      "inflow_lpm": 15.0,
+      "clog": 0.8,
+      "file": "q15p0_c80.json"
+    },
+    {
+      "case": "q20p0_c80",
+      "inflow_lpm": 20.0,
+      "clog": 0.8,
+      "file": "q20p0_c80.json"
+    },
+    {
+      "case": "q25p0_c80",
+      "inflow_lpm": 25.0,
+      "clog": 0.8,
+      "file": "q25p0_c80.json"
+    }
+  ]
+}

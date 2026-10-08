@@ -3,52 +3,52 @@
     "inflow_lpm": 15.0,
     "clog": 0.0,
     "lines": [
-      "P1 IN :  0.70 kPa   ",
-      "P2 OUT:  1.87 kPa   ",
-      "dP    :  0.31 kPa   ",
-      "FLOW  : 14.9 L/min  "
+      "P1 IN : --.-- (dry) ",
+      "P2 OUT:  0.71 kPa   ",
+      "dP    : --.--       ",
+      "FLOW  : 15.0 L/min  "
     ],
     "state": {
       "inflow_lpm": 15.0,
       "clog": 0.0,
-      "filtered_lpm": 14.88318507860458,
-      "overflow_lpm": 0.11681492139542016,
-      "level_mm": 251.99999999999994,
-      "p1_kpa": 0.7008107039999997,
-      "p2_kpa": 1.869301623329886,
-      "dp_kpa": 0.31099834467011395,
-      "media_loss_kpa": 0.31099834467011367,
-      "mesh_loss_pa": 3.0277512086737217,
-      "fabric_loss_pa": 307.97059346143993,
-      "outlet_loss_pa": 2015.3038533298864,
-      "p1_submerged": true,
-      "overflowing": true
+      "filtered_lpm": 15.0,
+      "overflow_lpm": 0.0,
+      "level_mm": 133.07555749395306,
+      "p1_kpa": 0.0,
+      "p2_kpa": 0.7092877929727271,
+      "dp_kpa": 0.7702014710272731,
+      "media_loss_kpa": 0.3134632545346302,
+      "mesh_loss_pa": 3.075466065717299,
+      "fabric_loss_pa": 310.3877884689129,
+      "outlet_loss_pa": 835.8230589727274,
+      "p1_submerged": false,
+      "overflowing": false
     }
   },
   {
     "inflow_lpm": 15.0,
     "clog": 0.5,
     "lines": [
-      "P1 IN :  0.70 kPa   ",
-      "P2 OUT:  1.59 kPa   ",
-      "dP    :  0.59 kPa   ",
-      "FLOW  : 13.8 L/min  "
+      "P1 IN : --.-- (dry) ",
+      "P2 OUT:  0.71 kPa   ",
+      "dP    : --.--       ",
+      "FLOW  : 15.0 L/min  "
     ],
     "state": {
       "inflow_lpm": 15.0,
       "clog": 0.5,
-      "filtered_lpm": 13.821790275259623,
-      "overflow_lpm": 1.1782097247403769,
-      "level_mm": 251.99999999999994,
-      "p1_kpa": 0.7008107039999997,
-      "p2_kpa": 1.5940216239385414,
-      "dp_kpa": 0.5862783440614586,
-      "media_loss_kpa": 0.5862783440614586,
-      "mesh_loss_pa": 14.263021898930464,
-      "fabric_loss_pa": 572.0153221625282,
-      "outlet_loss_pa": 1740.0238539385412,
-      "p1_submerged": true,
-      "overflowing": true
+      "filtered_lpm": 15.0,
+      "overflow_lpm": 0.0,
+      "level_mm": 166.3740859828169,
+      "p1_kpa": 0.0,
+      "p2_kpa": 0.7092877929727271,
+      "dp_kpa": 0.7702014710272731,
+      "media_loss_kpa": 0.6375738822074736,
+      "mesh_loss_pa": 16.79830526964784,
+      "fabric_loss_pa": 620.7755769378258,
+      "outlet_loss_pa": 835.8230589727274,
+      "p1_submerged": false,
+      "overflowing": false
     }
   },
   {
@@ -56,23 +56,23 @@
     "clog": 0.8,
     "lines": [
       "P1 IN :  0.70 kPa   ",
-      "P2 OUT:  0.97 kPa   ",
-      "dP    :  1.21 kPa   ",
-      "FLOW  : 11.0 L/min  "
+      "P2 OUT:  0.61 kPa   ",
+      "dP    :  1.57 kPa   ",
+      "FLOW  : 14.1 L/min  "
     ],
     "state": {
       "inflow_lpm": 15.0,
       "clog": 0.8,
-      "filtered_lpm": 11.040899337270435,
-      "overflow_lpm": 3.959100662729565,
+      "filtered_lpm": 14.077742754291469,
+      "overflow_lpm": 0.922257245708531,
       "level_mm": 252.0,
       "p1_kpa": 0.7008107040000002,
-      "p2_kpa": 0.9682120802451916,
-      "dp_kpa": 1.212087887754809,
-      "media_loss_kpa": 1.2120878877548087,
-      "mesh_loss_pa": 69.76777842038982,
-      "fabric_loss_pa": 1142.320109334419,
-      "outlet_loss_pa": 1114.2143102451919,
+      "p2_kpa": 0.6103543043603882,
+      "dp_kpa": 1.5699456636396123,
+      "media_loss_kpa": 1.569945663639612,
+      "mesh_loss_pa": 113.42585026001449,
+      "fabric_loss_pa": 1456.5198133795977,
+      "outlet_loss_pa": 736.8895703603886,
       "p1_submerged": true,
       "overflowing": true
     }
