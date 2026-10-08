@@ -1,0 +1,15 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  Microfiber filter v7 - OpenFOAM case (values filled by scripts/setup_case.py)
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      decomposeParDict;
+}
+
+numberOfSubdomains @@NPROCS@@;
+method          simple;
+coeffs          { n (@@NPROCS@@ 1 1); delta 0.001; }
+simpleCoeffs    { n (@@NPROCS@@ 1 1); delta 0.001; }

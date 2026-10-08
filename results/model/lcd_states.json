@@ -1,0 +1,80 @@
+[
+  {
+    "inflow_lpm": 15.0,
+    "clog": 0.0,
+    "lines": [
+      "P1 IN :  0.70 kPa   ",
+      "P2 OUT:  1.87 kPa   ",
+      "dP    :  0.31 kPa   ",
+      "FLOW  : 14.9 L/min  "
+    ],
+    "state": {
+      "inflow_lpm": 15.0,
+      "clog": 0.0,
+      "filtered_lpm": 14.88318507860458,
+      "overflow_lpm": 0.11681492139542016,
+      "level_mm": 251.99999999999994,
+      "p1_kpa": 0.7008107039999997,
+      "p2_kpa": 1.869301623329886,
+      "dp_kpa": 0.31099834467011395,
+      "media_loss_kpa": 0.31099834467011367,
+      "mesh_loss_pa": 3.0277512086737217,
+      "fabric_loss_pa": 307.97059346143993,
+      "outlet_loss_pa": 2015.3038533298864,
+      "p1_submerged": true,
+      "overflowing": true
+    }
+  },
+  {
+    "inflow_lpm": 15.0,
+    "clog": 0.5,
+    "lines": [
+      "P1 IN :  0.70 kPa   ",
+      "P2 OUT:  1.59 kPa   ",
+      "dP    :  0.59 kPa   ",
+      "FLOW  : 13.8 L/min  "
+    ],
+    "state": {
+      "inflow_lpm": 15.0,
+      "clog": 0.5,
+      "filtered_lpm": 13.821790275259623,
+      "overflow_lpm": 1.1782097247403769,
+      "level_mm": 251.99999999999994,
+      "p1_kpa": 0.7008107039999997,
+      "p2_kpa": 1.5940216239385414,
+      "dp_kpa": 0.5862783440614586,
+      "media_loss_kpa": 0.5862783440614586,
+      "mesh_loss_pa": 14.263021898930464,
+      "fabric_loss_pa": 572.0153221625282,
+      "outlet_loss_pa": 1740.0238539385412,
+      "p1_submerged": true,
+      "overflowing": true
+    }
+  },
+  {
+    "inflow_lpm": 15.0,
+    "clog": 0.8,
+    "lines": [
+      "P1 IN :  0.70 kPa   ",
+      "P2 OUT:  0.97 kPa   ",
+      "dP    :  1.21 kPa   ",
+      "FLOW  : 11.0 L/min  "
+    ],
+    "state": {
+      "inflow_lpm": 15.0,
+      "clog": 0.8,
+      "filtered_lpm": 11.040899337270435,
+      "overflow_lpm": 3.959100662729565,
+      "level_mm": 252.0,
+      "p1_kpa": 0.7008107040000002,
+      "p2_kpa": 0.9682120802451916,
+      "dp_kpa": 1.212087887754809,
+      "media_loss_kpa": 1.2120878877548087,
+      "mesh_loss_pa": 69.76777842038982,
+      "fabric_loss_pa": 1142.320109334419,
+      "outlet_loss_pa": 1114.2143102451919,
+      "p1_submerged": true,
+      "overflowing": true
+    }
+  }
+]

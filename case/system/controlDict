@@ -1,0 +1,30 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  Microfiber filter v7 - OpenFOAM case (values filled by scripts/setup_case.py)
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+
+application     simpleFoam;
+startFrom       latestTime;
+startTime       0;
+stopAt          endTime;
+endTime         @@END_ITER@@;
+deltaT          1;
+writeControl    timeStep;
+writeInterval   @@WRITE_INT@@;   // last two saves are compared to check convergence
+purgeWrite      2;
+writeFormat     ascii;
+writePrecision  8;
+writeCompression off;
+timeFormat      general;
+timePrecision   6;
+runTimeModifiable false;
+
+// Sensor values, flows and pictures are extracted afterwards by
+// scripts/postprocess.py (function objects are not used, so the case
+// runs the same on every OpenFOAM version).

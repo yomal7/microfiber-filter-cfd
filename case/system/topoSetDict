@@ -1,0 +1,25 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  Microfiber filter v7 - OpenFOAM case (values filled by scripts/setup_case.py)
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+
+// Porous zones: coarse mesh disc and the fabric bucket (4.5 mm thick
+// equivalent shell, same total resistance as the real 1.2 mm fabric)
+actions
+(
+    { name meshZone; type cellSet; action new; source cylinderToCell;
+      p1 (0 0 0.1560); p2 (0 0 0.1600); radius 0.0460; }
+    { name meshZone; type cellZoneSet; action new; source setToCellZone; set meshZone; }
+
+    { name bucketZone; type cellSet; action new; source cylinderToCell;
+      p1 (0 0 0.0400); p2 (0 0 0.1380); radius 0.0410; }
+    { name bucketZone; type cellSet; action subtract; source cylinderToCell;
+      p1 (0 0 0.0445); p2 (0 0 0.1390); radius 0.0365; }
+    { name bucketZone; type cellZoneSet; action new; source setToCellZone; set bucketZone; }
+);

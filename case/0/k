@@ -1,0 +1,20 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  Microfiber filter v7 - OpenFOAM case (values filled by scripts/setup_case.py)
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      k;
+}
+
+dimensions      [0 2 -2 0 0 0 0];
+internalField   uniform 1e-5;
+boundaryField
+{
+    inlet    { type turbulentIntensityKineticEnergyInlet; intensity 0.05; value uniform 1e-3; }
+    outlet   { type inletOutlet; inletValue uniform 1e-5; value uniform 1e-5; }
+    overflow { type inletOutlet; inletValue uniform 1e-5; value uniform 1e-5; }
+    walls    { type kqRWallFunction; value uniform 1e-5; }
+}

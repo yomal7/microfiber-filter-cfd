@@ -1,0 +1,179 @@
+name: CFD sweep
+
+# 1. Quick model (charts, LCD previews)
+# 2. Mesh the filter once
+# 3. Solve every (flow rate x clogging) case in parallel, one job each
+# 4. Collect: comparison chart + summary table, commit results/ back to
+#    the repo, and upload all videos as one downloadable artifact
+on:
+  workflow_dispatch:
+    inputs:
+      mesh:
+        description: "Mesh size (coarse = quick test, normal = report, fine = slow)"
+        type: choice
+        options: [coarse, normal, fine]
+        default: normal
+  push:
+    branches: [main]
+    paths:
+      - "case/**"
+      - "geometry/**"
+      - "model/**"
+      - "scripts/**"
+      - "params.py"
+      - ".github/workflows/cfd.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cfd-sweep
+  cancel-in-progress: true
+
+env:
+  MESH: ${{ inputs.mesh || 'normal' }}
+  WM_PROJECT_DIR: /usr/share/openfoam
+  VTK_DEFAULT_OPENGL_WINDOW: vtkOSOpenGLRenderWindow
+
+jobs:
+  model:
+    name: Quick model
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install matplotlib
+      - run: python model/make_charts.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: results-model
+          path: results/model
+
+  mesh:
+    name: Mesh
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install OpenFOAM
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q --no-install-recommends openfoam
+      - name: Build mesh
+        run: |
+          python scripts/setup_case.py --mesh "$MESH" --out runs/mesh
+          MESH_ONLY=1 bash scripts/run_case.sh runs/mesh
+      - name: Mesh report
+        if: always()
+        run: tail -n 40 runs/mesh/log.checkMesh || tail -n 60 runs/mesh/log.snappyHexMesh
+      - name: Pack mesh
+        run: tar -czf mesh.tgz -C runs/mesh constant/polyMesh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mesh
+          path: mesh.tgz
+          retention-days: 3
+
+  solve:
+    name: Q=${{ matrix.q }} clog=${{ matrix.clog }}
+    needs: mesh
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        q: [5, 10, 15, 20, 25]
+        clog: [0, 0.5, 0.8]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install OpenFOAM and Python tools
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q --no-install-recommends openfoam libgl1 libosmesa6
+          pip install pyvista matplotlib imageio imageio-ffmpeg
+      - uses: actions/download-artifact@v4
+        with:
+          name: mesh
+      - name: Set up case
+        run: |
+          mkdir -p meshsrc && tar -xzf mesh.tgz -C meshsrc
+          python scripts/setup_case.py --q ${{ matrix.q }} --clog ${{ matrix.clog }} \
+            --mesh "$MESH" --mesh-from meshsrc --out runs/case
+      - name: Solve
+        run: bash scripts/run_case.sh runs/case
+      - name: Solver log (last lines)
+        if: always()
+        run: tail -n 30 runs/case/log.simpleFoam || true
+      - name: Post-process (readings, LCD, pictures, video)
+        run: |
+          NAME=$(python -c "import json;print(json.load(open('runs/case/case.json'))['name'])")
+          echo "NAME=$NAME" >> "$GITHUB_ENV"
+          python scripts/postprocess.py runs/case --out "results/cfd/$NAME"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: results-cfd-${{ env.NAME }}
+          path: results/cfd/${{ env.NAME }}
+
+  collect:
+    name: Collect and commit results
+    needs: [model, mesh, solve]
+    if: always() && needs.mesh.result == 'success'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install matplotlib
+      - uses: actions/download-artifact@v4
+        with:
+          name: results-model
+          path: results/model
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: results-cfd-*
+          path: results/cfd
+      - name: Arrange CFD folders
+        run: |
+          cd results/cfd
+          for d in results-cfd-*; do
+            [ -d "$d" ] || continue
+            rm -rf "${d#results-cfd-}"
+            mv "$d" "${d#results-cfd-}"
+          done
+          ls
+      - run: python scripts/collect.py
+      - name: Gather videos
+        run: |
+          mkdir -p videos
+          for f in results/cfd/*/flow.mp4; do
+            [ -f "$f" ] && cp "$f" "videos/$(basename "$(dirname "$f")").mp4"
+          done
+          ls -la videos
+      - uses: actions/upload-artifact@v4
+        with:
+          name: videos
+          path: videos
+      - uses: actions/upload-artifact@v4
+        with:
+          name: all-results
+          path: results
+      - name: Commit results (pictures and readings; videos stay in the artifact)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results
+          if git diff --cached --quiet; then
+            echo "no changes"
+          else
+            git commit -m "Update CFD results (${MESH} mesh)"
+            git pull --rebase
+            git push
+          fi

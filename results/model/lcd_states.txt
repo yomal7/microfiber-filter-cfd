@@ -1,0 +1,24 @@
+Inflow 15.0 L/min, clogging 0 %
++--------------------+
+|P1 IN :  0.70 kPa   |
+|P2 OUT:  1.87 kPa   |
+|dP    :  0.31 kPa   |
+|FLOW  : 14.9 L/min  |
++--------------------+
+
+Inflow 15.0 L/min, clogging 50 %
++--------------------+
+|P1 IN :  0.70 kPa   |
+|P2 OUT:  1.59 kPa   |
+|dP    :  0.59 kPa   |
+|FLOW  : 13.8 L/min  |
++--------------------+
+
+Inflow 15.0 L/min, clogging 80 %
++--------------------+
+|P1 IN :  0.70 kPa   |
+|P2 OUT:  0.97 kPa   |
+|dP    :  1.21 kPa   |
+|FLOW  : 11.0 L/min  |
++--------------------+
+

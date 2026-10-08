@@ -1,0 +1,52 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  Microfiber filter v7 - OpenFOAM case (values filled by scripts/setup_case.py)
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvOptions;
+}
+
+// Coarse mesh: woven screen, pure inertial loss  dp = zeta * 0.5 rho U^2
+// over a 4 mm zone -> f = zeta / L.  Fabric: Darcy, d = t / (k L).
+coarseMesh
+{
+    type            explicitPorositySource;
+    active          yes;
+    explicitPorositySourceCoeffs
+    {
+        selectionMode   cellZone;
+        cellZone        meshZone;
+        type            DarcyForchheimer;
+        d   (@@MESH_D@@ @@MESH_D@@ @@MESH_D@@);
+        f   (@@MESH_F@@ @@MESH_F@@ @@MESH_F@@);
+        coordinateSystem
+        {
+            origin  (0 0 0);
+            e1      (1 0 0);
+            e2      (0 1 0);
+        }
+    }
+}
+
+fabricBucket
+{
+    type            explicitPorositySource;
+    active          yes;
+    explicitPorositySourceCoeffs
+    {
+        selectionMode   cellZone;
+        cellZone        bucketZone;
+        type            DarcyForchheimer;
+        d   (@@FAB_D@@ @@FAB_D@@ @@FAB_D@@);
+        f   (0 0 0);
+        coordinateSystem
+        {
+            origin  (0 0 0);
+            e1      (1 0 0);
+            e2      (0 1 0);
+        }
+    }
+}
