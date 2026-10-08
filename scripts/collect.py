@@ -8,6 +8,7 @@ write the data file the web viewer uses.
 import glob
 import json
 import os
+import shutil
 import sys
 
 import matplotlib
@@ -76,7 +77,7 @@ def main():
     plt.close(fig)
 
     viewer = {
-        "description": "OpenFOAM sweep of the v7 filter (sensor values in kPa, flows in L/min).",
+        "description": "OpenFOAM sweep of the v8 filter (sensor values in kPa, flows in L/min).",
         "runs": [{"inflow_lpm": r["inflow_lpm"], "clog": r["clog"],
                   "outlet_lpm": round(r["flows_lpm"]["outlet"], 3),
                   "overflow_lpm": round(r["flows_lpm"]["overflow"], 3),
@@ -87,6 +88,22 @@ def main():
     }
     with open(os.path.join(CFD, "viewer_data.json"), "w") as fh:
         json.dump(viewer, fh, indent=2)
+    # Bundle for the web viewer: copy results/viewer/ into the viewer's
+    # public/simulation/ folder (one file per run + an index)
+    viewer_dir = os.path.join(ROOT, "results", "viewer")
+    os.makedirs(viewer_dir, exist_ok=True)
+    index = []
+    for r in rows:
+        src = os.path.join(CFD, r["case"], "flow_paths.json")
+        if not os.path.exists(src):
+            continue
+        shutil.copyfile(src, os.path.join(viewer_dir, r["case"] + ".json"))
+        index.append({"case": r["case"], "inflow_lpm": r["inflow_lpm"], "clog": r["clog"],
+                      "file": r["case"] + ".json"})
+    with open(os.path.join(viewer_dir, "index.json"), "w") as fh:
+        json.dump({"description": "CFD runs for the viewer's Simulation mode",
+                   "mesh": rows[0]["mesh"], "runs": index}, fh, indent=2)
+
     # Readable summary for GitHub
     md = ["# CFD results", "",
           "Each row is one OpenFOAM run. Sensor values are what the LCD would show; "

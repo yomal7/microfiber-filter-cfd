@@ -34,7 +34,7 @@ MESHES = {
     "fine":   (0.0025, 2, 2, 2000),
 }
 
-BOX = (0.280, 0.110, 0.254)   # blockMesh box size (m)
+BOX = (0.295, 0.110, 0.254)   # blockMesh box size (m)
 
 
 def case_name(q, clog):

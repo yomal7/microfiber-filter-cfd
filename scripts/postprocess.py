@@ -133,13 +133,14 @@ def section_plot(internal, boundary, field, title, cmap, clim, unit, path, scale
 
 def compute_streamlines(internal, boundary):
     """Flow paths of water entering through the inlet."""
-    c = np.array(boundary["inlet"].center)
+    # seeds 4 mm inside the inlet pipe, spread over its cross-section
+    c = np.array(boundary["inlet"].center) + np.array([0.004, 0.0, 0.0])
     seeds = pv.Disc(center=c, inner=0.0, outer=0.0095, normal=(1, 0, 0),
-                    r_res=4, c_res=16)
+                    r_res=8, c_res=24)
     lines = internal.streamlines_from_source(
         seeds, vectors="U", integration_direction="forward",
-        max_length=3.0, initial_step_length=0.2, max_steps=40000,
-        terminal_speed=1e-6)
+        max_length=3.0, initial_step_length=0.1, step_unit="cl",
+        max_steps=100000, terminal_speed=1e-6)
     lines["speed"] = np.linalg.norm(lines["U"], axis=1)
     return lines
 
@@ -184,9 +185,68 @@ def split_lines(lines):
     return out
 
 
+def complete_paths(lines):
+    """Only the paths that reach the outlet or the overflow.
+
+    Some traced paths stop early where they graze a wall (a limit of
+    tracing on a cell mesh); they are left out of the animation.
+    """
+    out = []
+    for t, xyz, sp in split_lines(lines):
+        end = xyz[-1]
+        if end[0] > 0.165:
+            out.append((t, xyz, sp, "outlet"))
+        elif end[2] > 0.245:
+            out.append((t, xyz, sp, "overflow"))
+    return out
+
+
+def export_paths(lines, meta, summary, path, max_time=40.0, dt=0.08, ds=0.003):
+    """Flow paths for the web viewer (CAD coordinates in mm, Z up).
+
+    Each path is resampled so a point is kept every `dt` seconds or every
+    `ds` metres, whichever comes first, which keeps the file small while
+    following both the fast jet and the slow flow in the bucket.
+    """
+    out_paths = []
+    for t, xyz, sp, exit_to in complete_paths(lines):
+        keep = [0]
+        for i in range(1, len(t)):
+            last = keep[-1]
+            if t[i] > max_time:
+                break
+            if t[i] - t[last] >= dt or np.linalg.norm(xyz[i] - xyz[last]) >= ds:
+                keep.append(i)
+        if len(keep) < 3:
+            continue
+        k = np.array(keep)
+        out_paths.append({
+            "t": [round(float(v), 3) for v in t[k]],
+            "p": [round(float(v) * 1000.0, 1) for v in xyz[k].ravel()],
+            "v": [round(float(v), 3) for v in sp[k]],
+            # where the path ends: through the overflow (top) or the outlet
+            "exit": exit_to,
+        })
+    data = {
+        "case": meta["name"],
+        "inflow_lpm": meta["inflow_lpm"],
+        "clog": meta["clog"],
+        "mesh": meta["mesh"],
+        "lcd": summary["lcd"],
+        "sensors_kpa": summary["sensors_kpa"],
+        "p1_submerged": summary["p1_submerged"],
+        "flows_lpm": summary["flows_lpm"],
+        "units": {"p": "mm, FreeCAD axes (Z up)", "t": "s", "v": "m/s"},
+        "paths": out_paths,
+    }
+    with open(path, "w") as fh:
+        json.dump(data, fh, separators=(",", ":"))
+    return len(out_paths)
+
+
 def flow_video(boundary, lines, lcd, title, path, seconds=12, fps=24):
     """Water particles moving along the CFD flow paths, in real time."""
-    paths = split_lines(lines)
+    paths = [(t, xyz, sp) for t, xyz, sp, _ in complete_paths(lines)]
     if not paths:
         return False
     total_time = sum(p[0][-1] for p in paths)
@@ -339,6 +399,9 @@ def main():
         lines3d = compute_streamlines(internal, boundary)
         streamline_plot(boundary, lines3d, f"Flow paths from the inlet ({tag})",
                         os.path.join(out, "streamlines_3d.png"))
+        n_paths = export_paths(lines3d, meta, summary,
+                               os.path.join(out, "flow_paths.json"))
+        summary["viewer_paths"] = n_paths
         if not args.no_video:
             flow_video(boundary, lines3d, lines, f"Water flow ({tag})",
                        os.path.join(out, "flow.mp4"))

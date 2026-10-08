@@ -1,6 +1,6 @@
 # Microfiber filter: flow simulation
 
-Simulations for the two-stage microfiber filter (v7 design: 110 mm Stage 1
+Simulations for the two-stage microfiber filter (v8 design: 110 mm Stage 1
 housing screwed onto the narrower Stage 2 housing, coarse mesh, fabric
 bucket, pressure sensors P1/P2, flow sensor, overflow pipe on top).
 
@@ -85,6 +85,18 @@ Each CFD run folder (`results/cfd/q15p0_c50` = 15 L/min, 50 % clogged) holds:
 | `streamlines_3d.png` | 3D flow paths from the inlet |
 | `flow.mp4` (artifact only) | 12 s real-time animation of water particles with the LCD readings |
 
+## Data for the web viewer
+
+`scripts/collect.py` also writes `results/viewer/`: one JSON file per run
+(the flow paths traced from the inlet, the LCD lines, the flows) and an
+`index.json`. Copy that folder into the viewer repo as `public/simulation/`
+to update its **Flow simulation** mode:
+
+```bash
+rm -rf ../microfiber-filter-viewer/public/simulation
+cp -r results/viewer ../microfiber-filter-viewer/public/simulation
+```
+
 ## Running locally
 
 Quick model (needs Python with matplotlib):
@@ -103,7 +115,7 @@ scripts/run_case.sh runs/test               # about 10 min on 2 cores
 python3 scripts/postprocess.py runs/test    # writes results/cfd/q15p0_c00/
 ```
 
-The fluid domain STL is built from the v7 dimensions with FreeCAD
+The fluid domain STL is built from the v8 dimensions with FreeCAD
 (`freecadcmd geometry/make_fluid_domain.py`; for a 20 mm outlet run it with `OUTLET_ID=20`
 and set `OUTLET_ID = 0.020` in `params.py` too). The STL is committed, so FreeCAD is not needed to run the CFD. Open any
 run folder in ParaView (`case.foam`) to explore the results yourself.

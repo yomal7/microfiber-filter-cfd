@@ -25,6 +25,12 @@ if [ ! -f constant/polyMesh/owner ] || [ ! -d constant/polyMesh/sets ]; then
     topoSet > log.topoSet 2>&1
     checkMesh > log.checkMesh 2>&1 || true
     grep -E "cells:|Mesh OK|Failed" log.checkMesh || true
+    # every face must belong to inlet/outlet/overflow/walls; a leftover
+    # "background" patch means the STL pokes out of the blockMesh box
+    if grep -q "background" constant/polyMesh/boundary; then
+        echo "ERROR: geometry is not fully inside the blockMesh box" >&2
+        exit 1
+    fi
 else
     log "reusing mesh"
 fi

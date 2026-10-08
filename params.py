@@ -1,7 +1,7 @@
 """
 Shared design and physics parameters for the microfiber filter simulations.
 
-Geometry comes from the FreeCAD model (microfiber_filter_v7.py, mm there,
+Geometry comes from the FreeCAD model (microfiber_filter_v8.py, mm there,
 metres here). Physics values marked ASSUMED are estimates; replace them
 with measured values when the team has them.
 """
@@ -30,7 +30,7 @@ def lpm_to_m3s(q_lpm):
 
 
 # ------------------------------------------------------------------
-# Geometry from v7 (all heights measured from the bottom of Stage 2)
+# Geometry from v8 (all heights measured from the bottom of Stage 2)
 # ------------------------------------------------------------------
 STAGE1_ID = 0.102
 STAGE1_Z_TOP_INSIDE = 0.231          # underside of the lid
@@ -49,9 +49,9 @@ BUCKET_BOTTOM_Z = 0.040
 BUCKET_TOP_Z = 0.142
 BUCKET_WALL = 0.0012                 # fabric thickness
 
-OUTLET_ID = 0.016
-OUTLET_Z = 0.013                     # outlet axis
-OUTLET_LENGTH = 0.115                # housing wall to pipe end
+OUTLET_ID = 0.020                    # v8 (v7 had 16 mm)
+OUTLET_Z = 0.015                     # outlet axis (bore bottom = floor rim)
+OUTLET_LENGTH = 0.130                # housing wall to pipe end
 
 OVERFLOW_ID = 0.016
 OVERFLOW_X = 0.030
@@ -94,10 +94,10 @@ def screen_loss_coeff(open_fraction):
 FABRIC_PERMEABILITY = 2.0e-11        # m2, ASSUMED
 
 # ------------------------------------------------------------------
-# Outlet path losses (based on velocity in the 16 mm outlet)
+# Outlet path losses (based on velocity in the outlet pipe)
 # ------------------------------------------------------------------
 K_OUTLET_ENTRY = 0.5                 # sharp-edged pipe entry
-K_FLOW_SENSOR = 1.0                  # ASSUMED, full-bore turbine sensor
+K_FLOW_SENSOR = 1.0                  # ASSUMED, YF-B6 G3/4 turbine sensor
 K_OUTLET_EXIT = 1.0                  # free discharge (velocity head lost)
 PIPE_ROUGHNESS = 1.5e-6              # smooth plastic
 

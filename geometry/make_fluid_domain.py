@@ -1,5 +1,5 @@
 """
-Build the water volume (fluid domain) of the v7 filter for OpenFOAM.
+Build the water volume (fluid domain) of the v8 filter for OpenFOAM.
 
 Run with FreeCAD's command-line Python:
     freecadcmd geometry/make_fluid_domain.py
@@ -13,8 +13,8 @@ What is simplified compared with the CAD model:
     porous zones selected later by topoSet (see case/system/topoSetDict)
   * cloth straps are left out; the top 4 mm of the bucket is clamped in the
     plastic collar, so water cannot slip past the fabric there
-  * the flow sensor is a straight 16 mm pipe (its loss is in the model)
-All dimensions follow microfiber_filter_v7.py (mm).
+  * the flow sensor is a straight 20 mm pipe (its loss is in the model)
+All dimensions follow microfiber_filter_v8.py (mm).
 """
 
 import os
@@ -32,7 +32,7 @@ ROOT = os.path.dirname(HERE)
 OUT_DIR = os.path.join(ROOT, "case", "constant", "triSurface")
 
 # Allow a different outlet bore for design studies: OUTLET_ID=20 freecadcmd ...
-OUTLET_ID = float(os.environ.get("OUTLET_ID", "16"))
+OUTLET_ID = float(os.environ.get("OUTLET_ID", "20"))   # v8: 20 mm
 
 # ---------------- dimensions from v7 (mm) ----------------
 STAGE2_R = 90.5 / 2.0
@@ -57,9 +57,9 @@ OVERFLOW_X = 30.0
 OVERFLOW_R = 16.0 / 2.0
 OVERFLOW_TOP = 252.0           # spill level
 
-OUTLET_Z = FLOOR_Z + 16.0 / 2.0  # axis stays where v7 puts it (13 mm)
+OUTLET_Z = FLOOR_Z + OUTLET_ID / 2.0  # bore bottom level with the floor rim
 OUTLET_R = OUTLET_ID / 2.0
-OUTLET_END_X = 160.0
+OUTLET_END_X = 175.0
 
 
 def cyl_z(r, z0, z1, x=0.0, y=0.0):

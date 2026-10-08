@@ -87,8 +87,8 @@ def chart_pressure_budget():
     available = M.RHO_G * (P.OVERFLOW_SPILL_Z - P.DISCHARGE_Z) / 1000.0
 
     rows = []
-    for label, d in [("Current design\n16 mm outlet", 0.016),
-                     ("Option\n20 mm outlet", 0.020)]:
+    for label, d in [("v7 design\n16 mm outlet", 0.016),
+                     ("v8 design\n20 mm outlet", 0.020)]:
         rows.append((label,
                      M.outlet_loss(q, d) / 1000.0,
                      M.fabric_loss(q, 0.0) / 1000.0,
@@ -125,7 +125,7 @@ def chart_pressure_budget():
     ax.legend(loc="upper center", bbox_to_anchor=(0.45, -0.22), ncol=3)
     fig.subplots_adjust(left=0.17, right=0.97, top=0.86, bottom=0.33)
     note(fig, "The open overflow pipe caps the pressure at the water column "
-              "height (spill level 252 mm to outlet 13 mm). " +
+              "height (spill level 252 mm to outlet 15 mm). " +
               "Fabric permeability and sensor loss are assumed.")
     fig.savefig(os.path.join(OUT, "01_pressure_budget_15lpm.png"), dpi=170)
     plt.close(fig)
@@ -159,7 +159,7 @@ def chart_water_level():
     ax.set_ylim(0, 280)
     ax.set_xlabel("Inflow from the washing machine (L/min)")
     ax.set_ylabel("Water level above housing bottom (mm)")
-    ax.set_title("Water level inside the filter (current design, 16 mm outlet)")
+    ax.set_title("Water level inside the filter (v8 design, 20 mm outlet)")
     ax.legend(loc="lower right")
     fig.subplots_adjust(left=0.09, right=0.97, top=0.9, bottom=0.16)
     note(fig, "Below the P1 line the P1 sensor is in air and reads zero. "
@@ -344,8 +344,8 @@ def summary():
 if __name__ == "__main__":
     chart_pressure_budget()
     chart_water_level()
-    chart_clogging(CURRENT, "16mm", "current design, 16 mm outlet")
-    chart_clogging({"outlet_d": 0.020}, "20mm", "option: 20 mm outlet")
+    chart_clogging({"outlet_d": 0.016}, "16mm", "v7 design, 16 mm outlet")
+    chart_clogging(CURRENT, "20mm", "v8 design, 20 mm outlet")
     chart_outlet_bore()
     lcd_previews()
     lookup_table()
