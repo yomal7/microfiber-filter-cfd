@@ -5,7 +5,15 @@
   "mesh": "normal",
   "iterations": 1500.0,
   "converged": false,
-  "convergence_check": null,
+  "convergence_check": {
+    "compared_iterations": [
+      1125.0,
+      1500.0
+    ],
+    "P1_change_pa": -133.9652099609375,
+    "P2_change_pa": 0.5724725723266602,
+    "fabric_loss_change_pa": -0.4182361662387848
+  },
   "cells": 306276,
   "flows_lpm": {
     "inlet": 24.999989700593478,
@@ -17,6 +25,7 @@
     "P2": 1.6501598418953167,
     "dP": 0.5736695604324341
   },
+  "p1_submerged": true,
   "losses_pa": {
     "coarse_mesh": 16.705790519714355,
     "fabric_bucket": 508.2612572193146,
