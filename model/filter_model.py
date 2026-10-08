@@ -143,13 +143,18 @@ def overflow_onset_clog(q_in_lpm, **kw):
 
 
 def lcd_lines(state):
-    """The four 20-character lines of the LCD for one state."""
+    """The four 20-character lines of the LCD for one state.
+
+    When the water is below the P1 tap, P1 sits in air: the firmware should
+    show dashes for P1 and dP instead of a misleading number.
+    """
     def kpa(v):
         return f"{v:5.2f} kPa"
+    wet = state.get("p1_submerged", True)
     lines = [
-        f"P1 IN : {kpa(state['p1_kpa'])}",
+        f"P1 IN : {kpa(state['p1_kpa'])}" if wet else "P1 IN : --.-- (dry)",
         f"P2 OUT: {kpa(state['p2_kpa'])}",
-        f"dP    : {kpa(state['dp_kpa'])}",
+        f"dP    : {kpa(state['dp_kpa'])}" if wet else "dP    : --.--",
         f"FLOW  : {state['filtered_lpm']:4.1f} L/min",
     ]
     return [line[:20].ljust(20) for line in lines]

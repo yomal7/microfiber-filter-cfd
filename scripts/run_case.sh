@@ -41,7 +41,8 @@ if [ "$NPROCS" -gt 1 ]; then
     decomposePar -force > log.decomposePar 2>&1
     mpirun --allow-run-as-root --oversubscribe -np "$NPROCS" \
         simpleFoam -parallel > log.simpleFoam 2>&1
-    reconstructPar -latestTime > log.reconstructPar 2>&1
+    # all saved times (the last two), so the convergence check can compare them
+    reconstructPar > log.reconstructPar 2>&1
     rm -rf processor*
 else
     simpleFoam > log.simpleFoam 2>&1

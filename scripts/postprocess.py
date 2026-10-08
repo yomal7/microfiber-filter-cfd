@@ -278,6 +278,9 @@ def main():
     state = {
         "p1_kpa": p1 / 1000, "p2_kpa": p2 / 1000, "dp_kpa": dp / 1000,
         "filtered_lpm": q_out * 60000,
+        # The CFD keeps the housing full; whether the real water level reaches
+        # the P1 tap comes from the hydraulic model for this flow and clogging.
+        "p1_submerged": meta["model_prediction"]["p1_submerged"],
     }
     lines = M.lcd_lines(state)
 
@@ -306,6 +309,7 @@ def main():
         "flows_lpm": {"inlet": q_in * 60000, "outlet": q_out * 60000,
                       "overflow": q_ov * 60000},
         "sensors_kpa": {"P1": p1 / 1000, "P2": p2 / 1000, "dP": dp / 1000},
+        "p1_submerged": state["p1_submerged"],
         "losses_pa": {"coarse_mesh": mesh_loss, "fabric_bucket": fabric_loss,
                       "flow_sensor_added": sensor_loss},
         "probes": probe,
