@@ -1,0 +1,72 @@
+{
+  "case": "q10p0_c50",
+  "inflow_lpm": 10.0,
+  "clog": 0.5,
+  "mesh": "normal",
+  "iterations": 1500.0,
+  "converged": false,
+  "convergence_check": null,
+  "cells": 306276,
+  "flows_lpm": {
+    "inlet": 9.999997475739637,
+    "outlet": 9.977658876123177,
+    "overflow": 0.0
+  },
+  "sensors_kpa": {
+    "P1": 0.0,
+    "P2": 0.7951622694804193,
+    "dP": 0.4045616356849671
+  },
+  "losses_pa": {
+    "coarse_mesh": 3.2416259407997132,
+    "fabric_bucket": 368.74839026927947,
+    "flow_sensor_added": 339.3628798553278
+  },
+  "probes": {
+    "P1": {
+      "p_kin": 1.0142745971679688,
+      "speed": 0.12506122887134552,
+      "valid": true
+    },
+    "P2": {
+      "p_kin": 0.6065325736999512,
+      "speed": 0.09068446606397629,
+      "valid": true
+    },
+    "above_mesh": {
+      "p_kin": 0.9959671497344971,
+      "speed": 0.05782407522201538,
+      "valid": true
+    },
+    "below_mesh": {
+      "p_kin": 0.9927000403404236,
+      "speed": 0.019562939181923866,
+      "valid": true
+    },
+    "inside_bucket": {
+      "p_kin": 0.9930291771888733,
+      "speed": 0.016037197783589363,
+      "valid": true
+    },
+    "outside_bucket": {
+      "p_kin": 0.621381938457489,
+      "speed": 0.07233123481273651,
+      "valid": true
+    }
+  },
+  "lcd": [
+    "P1 IN :  0.00 kPa   ",
+    "P2 OUT:  0.80 kPa   ",
+    "dP    :  0.40 kPa   ",
+    "FLOW  : 10.0 L/min  "
+  ],
+  "model_prediction": {
+    "p1_kpa": 0.0,
+    "p2_kpa": 0.7695377621993637,
+    "dp_kpa": 0.7099515018006366,
+    "filtered_lpm": 10.0,
+    "overflow_lpm": 0.0,
+    "mesh_loss_pa": 7.465913453176819,
+    "fabric_loss_pa": 413.8503846252172
+  }
+}
